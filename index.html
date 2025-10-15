@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy-Vietnamese Women's Day</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="moon-loader"></div>
+            <h2>Đợi chút xíu đang tải 3D...</h2>
+        </div>
+    </div>
+
+    <!-- 3D Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- UI Overlay -->
+    <div class="ui-overlay">
+        <header class="header">
+            <div class="logo">🥤 Happy-Vietnamese Women's Day 🌙</div>
+        </header>
+
+        <div class="greeting-card">
+            <h2 class="greeting-title">🎑 Chúc Mừng Trung Thu 🎑</h2>
+            <p class="greeting-text" id="greetingText">
+            00 Trăng tròn vầng sáng - Trung Thu sum vầy đây! 🥮
+            </p>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="window.App.changeGreeting()">✨ Đổi Lời Chúc</button>
+            <button class="btn" onclick="window.App.initSimpleSwapper()">� Ngẫu Nhiên</button>
+        </div>
+    </div>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Các file JS tách riêng (có chú thích tiếng Việt) -->
+    <script src="js/cup.js"></script>
+    <script src="js/moon.js"></script>
+    <script src="js/snack.js"></script>
+    <script src="js/mooncake.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js">
+    </script>
+</body>
+</html>
