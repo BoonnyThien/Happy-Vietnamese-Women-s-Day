@@ -1,0 +1,334 @@
+/* Styles extracted từ index.html - chú thích tiếng Việt để dễ hiểu */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #0a1929 0%, #1e3c72 50%, #2a5298 100%);
+}
+
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Loading Screen */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+.loader-content {
+    text-align: center;
+    color: white;
+}
+
+.moon-loader {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffd89b 0%, #ffecb3 100%);
+    box-shadow: 0 0 50px rgba(255, 216, 155, 0.8);
+    animation: float 3s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* UI Overlay */
+.ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Header */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    pointer-events: auto;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+/* Greeting Card */
+.greeting-card {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    pointer-events: auto;
+    max-width: 90%;
+    width: 400px;
+    opacity: 0;
+    animation: slideUp 1s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.greeting-title {
+    font-size: 24px;
+    color: #d4145a;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.greeting-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Control Buttons */
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    pointer-events: auto;
+}
+
+.btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Floating Elements
+.lantern {
+    position: absolute;
+    width: 30px;
+    height: 70px;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: floatLantern 15s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes floatLantern {
+    100% { transform: translateY(100vh) rotate(0deg); }
+    0% { transform: translateY(-100vh) rotate(360deg); }
+} */
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .logo { font-size: 20px; }
+    .greeting-card { 
+        bottom: 80px; 
+        padding: 15px 20px;
+    }
+    .greeting-title { font-size: 20px; }
+    .greeting-text { font-size: 14px; }
+    .btn { 
+        padding: 10px 18px; 
+        font-size: 12px; 
+    }
+}
+
+/* Star particles */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.mobile-container {
+    width: 375px;
+    height: 812px;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.three-cup {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.page-content {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+}
+
+.particle-text {
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+.moon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffd700;
+    box-shadow: 0 0 20px #ffd700;
+    cursor: pointer;
+}
+
+#floating-messages {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-message {
+    position: absolute;
+    font-size: 1em;
+    color: #ff4500;
+    opacity: 0;
+}
+
+.gift-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}

@@ -1,44 +1,86 @@
 <template>
-  <div class="mobile-container">
-    <ThreeScene class="background-canvas" />
-    <div class="ui-overlay">
-      <!-- Background stars + moon từ logic cũ -->
-      <div id="stars" class="stars"></div>
-      <Controls />
+  <div v-if="isLoading" class="loader" id="loader">
+    <div class="loader-content">
+      <div class="moon-loader"></div>
+      <h2>Đợi chút xíu đang tải 3D...</h2>
     </div>
-    
-    <!-- Các model hoa mới -->
-    <HoaHong />
-    <HoaCuc />
-    <HoaCamTu />
+  </div>
+
+  <div v-else>
+    <Stars />
+
+    <!-- TROISJS MAGIC: <renderer> tự tạo canvas + scene + camera + loop! -->
+    <renderer 
+      ref="renderer" 
+      antialias 
+      orbit-ctrl  <!-- Tự động camera controls! -->
+      resize="window"
+      :onBeforeRender="onBeforeRender"
+    >
+      <camera :position="{ z: 20 }" />  <!-- Camera tự động -->
+      <scene>  <!-- Scene tự động -->
+        <!-- Lights -->
+        <point-light :position="{ y: 50, z: 50 }" color="0xfff9d6" intensity="0.9" />
+        <directional-light :position="{ y: 10 }" color="0xfff9d6" intensity="0.12" />
+
+        <!-- Models -->
+        <Moon ref="moon" />
+        <!-- Thêm <HoaHong ref="cup" /> nếu có component -->
+        
+        <!-- Ambient light -->
+        <ambient-light intensity="0.2" />
+      </scene>
+    </renderer>
+
+    <div class="ui-overlay">
+      <header class="header">
+        <div class="logo">🥤 Happy-Vietnamese Women's Day 🌙</div>
+      </header>
+      <div class="greeting-card">
+        <h2 class="greeting-title">🎑 Chúc Mừng Ngày Phụ nữ Việt Nam 🎑</h2>
+        <p class="greeting-text">{{ greetings[currentGreeting] }}</p>
+      </div>
+      <div class="controls">
+        <button class="btn" @click="changeGreeting">✨ Đổi Lời Chúc</button>
+        <button class="btn" @click="swapItems">🔀 Ngẫu Nhiên</button>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue'
-import ThreeScene from './components/canvas/Scene.vue'
-import HoaHong from './components/HoaHong.vue'
-import HoaCuc from './components/HoaCuc.vue'
-import HoaCamTu from './components/HoaCamTu.vue'
-import Controls from './components/ui/Controls.vue'
+import Stars from './components/ui/Stars.vue'
+import Moon from './components/canvas/Moon.vue'
+import { Renderer } from 'troisjs'  // Import Renderer từ TroisJS
+import { useUI } from './composables/useUI.js'
 
-import './styles/main.css'
+const renderer = ref(null)
+const moon = ref(null)
+const isLoading = ref(true)
 
-export default {
-  components: { 
-    ThreeScene,
-    HoaHong,
-    HoaCuc,
-    HoaCamTu
-    , Controls
-  },
-  setup() {
-    onMounted(() => {
-      // Chỉ giữ lại phần tạo stars và khởi tạo moon từ code cũ
-      setTimeout(() => {
-        if (window.App && window.App.createStars) window.App.createStars()
-      }, 300)
-    })
-  }
+const { 
+  currentGreeting, 
+  greetings, 
+  changeGreeting, 
+  swapItems, 
+  initAnimations 
+} = useUI()
+
+const onBeforeRender = () => {
+  // Animation loop tự động của TroisJS - thêm rotation nếu cần
+  if (moon.value) moon.value.rotation.y += 0.01
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false
+    // Init GSAP sau load
+    if (moon.value) initAnimations([moon.value])
+  }, 2000)
+})
 </script>
+
+<style>
+@import './assets/css/main.css';
+</style>

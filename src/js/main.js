@@ -1,4 +1,4 @@
-// main.js
+// js/main.js
 // File chính: khởi tạo, lắng nghe sự kiện, và chạy animation khởi động
 window.App = window.App || {};
 (function(exports){

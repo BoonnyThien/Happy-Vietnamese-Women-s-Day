@@ -4,7 +4,7 @@
   "description": "",
   "main": "vite.config.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "three": "^0.169.0",
-    "trois": "^0.4.4",
+    "troisjs": "^0.3.4",
+    "gsap": "^3.12.5",
     "vue": "^3.4.27"
   },
   "devDependencies": {
