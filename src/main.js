@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
+
+// 1. Import file CSS chính của bạn vào đây
+import './assets/css/main.css' 
+
+// 2. Import component gốc là App.vue
 import App from './App.vue'
-import './styles/main.css'
 
-// Legacy moon (keeps createMoon/createStars functions if present)
-import './js/moon.js'
-
+// 3. Tạo và gắn ứng dụng Vue vào div#app trong index.html
 createApp(App).mount('#app')

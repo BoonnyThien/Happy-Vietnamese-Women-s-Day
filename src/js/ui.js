@@ -1,25 +1,10 @@
-// ui.js
+// js/ui.js
 // Chứa các hàm UI: thay lời chúc, tắt/bật animation, chụp màn hình, tạo sao nhỏ
 window.App = window.App || {};
 (function(exports){
     let animationPaused = false;
     const greetings = [
-        "",
-        "  01 Trung Thu an lành - Hạnh phúc vuông tròn! 🌙",
-        "  10 Trung Thu đoàn viên - Yêu thương ngập tràn! 💝",
-        "  11 Trăng sáng rạng ngời - Trung Thu tuyệt vời! ✨",
-        " 100 Ánh trăng dịu dàng - Mãi mãi vẹn nguyên! 🎊",
-        " 101 Trăng thu tỏa sáng – Niềm vui tràn ngập! 🌕",
-        " 110 Trung Thu hạnh phúc – Bình an trọn vẹn! 🍵",
-        " 111 Trăng sáng soi đường – Yêu thương kết nối! 🌙",
-        "1000 Bánh nồng hương vị – Ấm áp tình thân! 🥮",
-        "1001 Trăng rằm tỏa sáng – An lành bên nhau! 💫",
-        "1010 Ánh trăng vàng ngọc – Sum vầy hạnh phúc! 🌟",
-        "1011 Đêm rằm rực rỡ – Kỷ niệm ngọt ngào! 🎉",
-        "1100 Trung Thu tỏa sáng – Niềm vui ngập tràn! 🎊",
-        "1101 Trăng lên đỉnh núi – Lòng người sum vầy! 🏮",
-        "1110 Trăng tròn gắn kết – Yêu thương bền lâu! 💝",
-        "1111 Ní hay dùng và thích loại cafe nào nhỉ? ☕"
+        "Chúc mừng 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống! ❤️"
     ];
     let currentGreeting = 0;
 
