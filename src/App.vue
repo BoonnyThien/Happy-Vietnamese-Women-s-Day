@@ -1,63 +1,55 @@
 <template>
-  <div v-if="isLoading" class="loader" id="loader">
-    <div class="loader-content">
-      <div class="moon-loader"></div>
-      <h2>Đợi chút xíu đang tải 3D...</h2>
-    </div>
-  </div>
+  <LoadingScreen v-if="isLoading" />
 
   <div v-else>
     <Stars />
+    
+    <UiOverlay 
+      :greetingText="greetings[currentGreeting]"
+      @changeGreeting="changeGreeting"
+      @swapItems="swapItems"
+    />
 
-    <!-- TROISJS MAGIC: <renderer> tự tạo canvas + scene + camera + loop! -->
-    <renderer 
-      ref="renderer" 
-      antialias 
-      orbit-ctrl  <!-- Tự động camera controls! -->
-      resize="window"
-      :onBeforeRender="onBeforeRender"
-    >
-      <camera :position="{ z: 20 }" />  <!-- Camera tự động -->
-      <scene>  <!-- Scene tự động -->
-        <!-- Lights -->
-        <point-light :position="{ y: 50, z: 50 }" color="0xfff9d6" intensity="0.9" />
-        <directional-light :position="{ y: 10 }" color="0xfff9d6" intensity="0.12" />
-
-        <!-- Models -->
-        <Moon ref="moon" />
-        <!-- Thêm <HoaHong ref="cup" /> nếu có component -->
+    <ThreeScene>
+      <Moon ref="moon" />
+   
+      
+      <Suspense>
+        <BoHoaHong :position="[0, -2, 0]" :scale="[3,3,3]" :draco="true" />
         
-        <!-- Ambient light -->
-        <ambient-light intensity="0.2" />
-      </scene>
-    </renderer>
-
-    <div class="ui-overlay">
-      <header class="header">
-        <div class="logo">🥤 Happy-Vietnamese Women's Day 🌙</div>
-      </header>
-      <div class="greeting-card">
-        <h2 class="greeting-title">🎑 Chúc Mừng Ngày Phụ nữ Việt Nam 🎑</h2>
-        <p class="greeting-text">{{ greetings[currentGreeting] }}</p>
-      </div>
-      <div class="controls">
-        <button class="btn" @click="changeGreeting">✨ Đổi Lời Chúc</button>
-        <button class="btn" @click="swapItems">🔀 Ngẫu Nhiên</button>
-      </div>
-    </div>
+        <template #fallback>
+          <TresMesh>
+            <TresBoxGeometry />
+            <TresMeshNormalMaterial />
+          </TresMesh>
+        </template>
+      </Suspense>
+    </ThreeScene>
+    
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import Stars from './components/ui/Stars.vue'
-import Moon from './components/canvas/Moon.vue'
-import { Renderer } from 'troisjs'  // Import Renderer từ TroisJS
-import { useUI } from './composables/useUI.js'
+import { ref, onMounted } from 'vue';
+// BỎ import OrbitControls vì ThreeScene đã lo việc này
+// import { OrbitControls } from '@tresjs/cientos'; 
+import { useUI } from './composables/useUI.js';
 
-const renderer = ref(null)
-const moon = ref(null)
-const isLoading = ref(true)
+// Import các component UI và 3D
+import LoadingScreen from './components/ui/LoadingScreen.vue';
+import UiOverlay from './components/ui/UiOverlay.vue';
+import Stars from './components/ui/Stars.vue';
+import Moon from './components/canvas/Moon.vue';
+import BoHoaHong from './components/BoHoaHong.vue';
+import HoaHong from './components/HoaHong.vue';
+
+
+// Import component sân khấu 3D
+import ThreeScene from './components/ThreeScene.vue'; // <-- DÙNG COMPONENT NÀY
+
+// Logic không thay đổi
+const moon = ref(null);
+const isLoading = ref(true);
 
 const { 
   currentGreeting, 
@@ -65,20 +57,18 @@ const {
   changeGreeting, 
   swapItems, 
   initAnimations 
-} = useUI()
-
-const onBeforeRender = () => {
-  // Animation loop tự động của TroisJS - thêm rotation nếu cần
-  if (moon.value) moon.value.rotation.y += 0.01
-}
+} = useUI();
 
 onMounted(() => {
   setTimeout(() => {
-    isLoading.value = false
-    // Init GSAP sau load
-    if (moon.value) initAnimations([moon.value])
-  }, 2000)
-})
+    isLoading.value = false;
+    // Lưu ý: ref="moon" bây giờ nằm trong ThreeScene, 
+    // App.vue không truy cập trực tiếp được nữa. 
+    // Cần cách khác để trigger animation nếu cần.
+    // if (moon.value) initAnimations([moon.value]); 
+    console.log("3D Scene loaded"); 
+  }, 2000);
+});
 </script>
 
 <style>

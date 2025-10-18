@@ -5,7 +5,9 @@ import gsap from 'gsap'
 export function useUI() {
   const currentGreeting = ref(0)
   const greetings = ref([
-    "Chúc mừng 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống! ❤️"
+    "Chúc mừng 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống! ❤️",
+    "",
+    ""
   ])
 
   const changeGreeting = () => {

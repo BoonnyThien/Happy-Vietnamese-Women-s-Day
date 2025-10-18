@@ -1,18 +1,12 @@
 <template>
-  <ModelViewer 
-    model-path="/models/HoaHong.glb"
-    :position="{ x: -2, y: 0, z: 0 }"
-    :scale="{ x: 1, y: 1, z: 1 }"
+  <GLTFModel 
+    path="/models/HoaHong.glb"
+    :position="[-2, 0, 0]"
+    :scale="[2, 1, 1]"
+    :draco="true"
   />
 </template>
 
-<script>
-import ModelViewer from './ModelViewer.vue'
-
-export default {
-  name: 'HoaHong',
-  components: {
-    ModelViewer
-  }
-}
+<script setup>
+import { GLTFModel } from '@tresjs/cientos';
 </script>

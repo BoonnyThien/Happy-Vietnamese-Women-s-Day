@@ -11,13 +11,13 @@ export default defineConfig({
     }
   },
   server: {
-    port: 3000, // Đổi port tránh conflict
+    port: 3000, // Hoặc 3001 tùy bạn
     host: '0.0.0.0',
     open: true
   },
   base: './',
-  // Cho production build
-  optimizeDeps: {
-    include: ['troisjs']
-  }
+  // TẠM THỜI XÓA HOẶC COMMENT OUT KHỐI NÀY
+  // optimizeDeps: {
+  //   include: ['@tresjs/core', '@tresjs/cientos']
+  // }
 })

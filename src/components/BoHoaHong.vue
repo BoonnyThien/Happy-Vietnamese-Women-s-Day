@@ -1,19 +1,20 @@
 <template>
-  <ModelViewer 
-    model-path="/models/BoHoaHongFull.glb"
-    :position="{ x: 0, y: 0, z: 0 }"
-    :scale="{ x: 1, y: 1, z: 1 }"
-    :rotation="{ x: 0, y: 0, z: 0 }"
+  <GLTFModel 
+    path="/models/BoHoaHongFull.glb" 
+    :position="position"
+    :scale="scale"
+    :draco="draco"
   />
 </template>
 
-<script>
-import ModelViewer from './ModelViewer.vue'
+<script setup>
+// Import component GLTFModel từ Cientos
+import { GLTFModel } from '@tresjs/cientos';
 
-export default {
-  name: 'BoHoaHong',
-  components: {
-    ModelViewer
-  }
-}
+// Định nghĩa props như cũ, nhưng dùng <script setup> cho nhất quán
+defineProps({
+  position: Object,
+  scale: Object,
+  draco: Boolean
+});
 </script>

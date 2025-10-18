@@ -1,10 +1,13 @@
 import { createApp } from 'vue'
+import Tres from '@tresjs/core' // Tres core plugin (registers <Tres*> components)
 
-// 1. Import file CSS chính của bạn vào đây
-import './assets/css/main.css' 
-
-// 2. Import component gốc là App.vue
 import App from './App.vue'
+import './assets/css/main.css'
 
-// 3. Tạo và gắn ứng dụng Vue vào div#app trong index.html
-createApp(App).mount('#app')
+const app = createApp(App)
+
+// Register Tres core first, then register Cientos plugin so its components are available
+app.use(Tres)
+
+
+app.mount('#app')

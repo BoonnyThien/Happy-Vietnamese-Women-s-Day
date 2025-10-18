@@ -1,18 +1,11 @@
 <template>
-  <ModelViewer 
-    model-path="/models/HoaCamTuFull.glb"
-    :position="{ x: 2, y: 0, z: 0 }"
-    :scale="{ x: 1, y: 1, z: 1 }"
+  <GLTFModel 
+    path="/models/HoaCamTuFull.glb"
+    :position="[2, 0, 0]"
+    :scale="[1, 1, 1]"
   />
 </template>
 
-<script>
-import ModelViewer from './ModelViewer.vue'
-
-export default {
-  name: 'HoaCamTu',
-  components: {
-    ModelViewer
-  }
-}
+<script setup>
+import { GLTFModel } from '@tresjs/cientos';
 </script>
