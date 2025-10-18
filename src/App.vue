@@ -5,18 +5,22 @@
     <Stars />
     
     <UiOverlay 
+      v-if="showUi"
       :greetingText="greetings[currentGreeting]"
       @changeGreeting="changeGreeting"
       @swapItems="swapItems"
     />
-
+    <ToggleUiButton @toggleUi="toggleUiVisibility" />
     <ThreeScene>
       <Moon ref="moon" />
    
       
       <Suspense>
-        <BoHoaHong :position="[0, -2, 0]" :scale="[3,3,3]" :draco="true" />
-        
+        <!-- <BoHoaHong :position="[0, -2, 0]" :scale="[3,3,3]" :draco="true" /> -->
+        <HongCamTuMix 
+          :position="[0, 4, 0]" 
+          :scale="[1, 1, 1]" 
+        />
         <template #fallback>
           <TresMesh>
             <TresBoxGeometry />
@@ -31,9 +35,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-// BỎ import OrbitControls vì ThreeScene đã lo việc này
-// import { OrbitControls } from '@tresjs/cientos'; 
 import { useUI } from './composables/useUI.js';
+
+import HongCamTuMix from './components/bouquets/HongCamTuMix.vue';
 
 // Import các component UI và 3D
 import LoadingScreen from './components/ui/LoadingScreen.vue';
@@ -42,8 +46,15 @@ import Stars from './components/ui/Stars.vue';
 import Moon from './components/canvas/Moon.vue';
 import BoHoaHong from './components/BoHoaHong.vue';
 import HoaHong from './components/HoaHong.vue';
+import ToggleUiButton from './components/ui/ToggleUiButton.vue';
 
 
+
+const showUi = ref(true);
+
+const toggleUiVisibility = () => {
+  showUi.value = !showUi.value;
+};
 // Import component sân khấu 3D
 import ThreeScene from './components/ThreeScene.vue'; // <-- DÙNG COMPONENT NÀY
 
@@ -73,4 +84,5 @@ onMounted(() => {
 
 <style>
 @import './assets/css/main.css';
+@import './assets/css/styles.css';
 </style>

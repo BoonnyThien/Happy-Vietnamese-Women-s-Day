@@ -1,15 +1,15 @@
 <template>
   <div class="ui-overlay">
     <header class="header">
-      <div class="logo">🥤 Happy-Vietnamese Women's Day 🌙</div>
+      <div class="logo">💐 Happy-Vietnamese Women's Day 🌸</div>
     </header>
     <div class="greeting-card">
-      <h2 class="greeting-title">🎑 Chúc Mừng Ngày Phụ nữ Việt Nam 🎑</h2>
+      <h2 class="greeting-title">💖 Chúc Mừng Ngày Phụ nữ Việt Nam 💖</h2>
       <p class="greeting-text">{{ greetingText }}</p>
     </div>
     <div class="controls">
       <button class="btn" @click="$emit('changeGreeting')">✨ Đổi Lời Chúc</button>
-      <button class="btn" @click="$emit('swapItems')">🔀 Ngẫu Nhiên</button>
+      <button class="btn" @click="$emit('swapItems')">🎁 Thêm </button>
     </div>
   </div>
 </template>

@@ -22,7 +22,7 @@ const moonTexture = new TextureLoader().load('/textures/moon.png', (texture) => 
     <TresSphereGeometry :args="[2, 64, 64]" />
     <TresMeshStandardMaterial 
       color="#fff9d6" 
-      :emissive="0xfff9d6" 
+      :emissive="0xf5f5f5" 
       :emissiveIntensity="0.12"
       :transparent="true" 
       :alphaTest="0.05"
